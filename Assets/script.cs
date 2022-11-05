@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class script : MonoBehaviour
+public class Script : ScriptableObject
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private int testInt;
+
+    [SerializeField]
+    private string testString;
+
+    [CreateAssetMenu(fileName = "New TestData", menuName = "Test Data", order = 51)]
+    public class TestData : ScriptableObject {}
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+
 }
