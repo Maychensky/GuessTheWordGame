@@ -57,9 +57,9 @@ internal class ButtonKay
         AddCanvas();
     }
 
-    internal ButtonKay() : this( new(), new(1, 1), Color.white, DEFOLT_CONTENT, DEFOLT_SIZE_CONTENT, Color.black) { }
-    internal ButtonKay(char content): this (new(), new(1, 1), Color.white, content, DEFOLT_SIZE_CONTENT, Color.black) { }
-    internal ButtonKay(Vector3 position, Color colorBox, char content, Color colorContent) : this( position, new(1, 1), colorBox, content, DEFOLT_SIZE_CONTENT, colorContent) { }
+    internal ButtonKay() : this( Vector3.zero, Vector2.one, Color.white, DEFOLT_CONTENT, DEFOLT_SIZE_CONTENT, Color.black) { }
+    internal ButtonKay(char content): this (Vector3.zero, Vector2.one, Color.white, content, DEFOLT_SIZE_CONTENT, Color.black) { }
+    internal ButtonKay(Vector3 position, Color colorBox, char content, Color colorContent) : this( position, Vector2.one, colorBox, content, DEFOLT_SIZE_CONTENT, colorContent) { }
     internal ButtonKay( Vector3 position, Vector2 scaleBox, Color colorBox, char content, float sizeContent, Color colorContent)
     {
         _position = position;
@@ -94,10 +94,10 @@ internal class ButtonKay
     {
         _button = new GameObject("Button", typeof(Button), typeof(CanvasRenderer), typeof(Image));
         _button.transform.SetParent(_canvasObject.transform);
-        CorrectParamButton();
+        CorrectParamsButton();
     }
 
-    private void CorrectParamButton()
+    private void CorrectParamsButton()
     {
         CorrectPosition();
         CorrectScaleBox();
@@ -110,16 +110,16 @@ internal class ButtonKay
         _componentTMPForText = _textForButton.AddComponent<TextMeshProUGUI>();
         _textForButton.transform.SetParent(_button.transform);
         _componentTMPForText.alignment = TextAlignmentOptions.Center;
-        CorrectParamTextForButton();
+        CorrectParamsTextForButton();
     }
 
-    private void CorrectParamTextForButton()
+    private void CorrectParamsTextForButton()
     {
         CorrectContent();
         CorrectSizeContent();
         CorrectColorContent();
     }
-    
+
     internal void SetActive(bool active) => _button.SetActive(active);
 
 }
