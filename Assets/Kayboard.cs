@@ -18,7 +18,6 @@ namespace WordGame
             CreatePanel();
             InitAlphabetDictonary();
         }
-
         private void InitAlphabetDictonary()
         {
             _dictionaryLettersButtonKays = new Dictionary<char, ButtonKay>();
@@ -29,7 +28,6 @@ namespace WordGame
             }
             AddWordInPanel();
         }
-
         private void CreatePanel()
         {
             _panelForKayboard = new GameObject("Panel for kayboard", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(GridLayoutGroup));
@@ -38,30 +36,25 @@ namespace WordGame
             CorrectParamsRectTransform();
             CorrectPeramsGridLayoutGroup();
         }
-
         internal void SetParent(GameObject parentObject)
         {
             _panelForKayboard.transform.SetParent(parentObject.transform);
         }
-
         internal void SetActionForButtonClick(DelegateOnClick action)
         {
             foreach (var button in _dictionaryLettersButtonKays.Values)
                 button.EventOnClick += action;
         }
-
         internal void DefoltKayboard()
         {
             foreach (var buttonKay in _dictionaryLettersButtonKays)
                 buttonKay.Value.SetActive(true);
         }
-
         private void AddWordInPanel()
         {
             foreach(var button in _dictionaryLettersButtonKays.Values)
                 button.SetParent(_panelForKayboard);
         }
-
         private void CorrectParamsRectTransform()
         {
             RectTransform uitransform = _panelForKayboard.GetComponent<RectTransform>();
@@ -71,7 +64,6 @@ namespace WordGame
             uitransform.offsetMin = Vector2.zero;
             uitransform.offsetMax = Vector2.zero;
         }
-
         private void CorrectPeramsGridLayoutGroup()
         {
             GridLayoutGroup uiHorizontalLayoutGroup = _panelForKayboard.GetComponent<GridLayoutGroup>();

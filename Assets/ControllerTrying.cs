@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 namespace WordGame
 {
     internal class ControllerTrying

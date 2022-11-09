@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 namespace WordGame
 {
-
     internal class Word
     {
         private GameObject _parentObject;
@@ -19,7 +18,6 @@ namespace WordGame
         }
         internal delegate void DlegateOpenedWord(); 
         internal event DlegateOpenedWord EventOpenedWord;
-
         internal Word() : this (null) { }
         internal Word(GameObject parentObject)
         {
@@ -27,7 +25,6 @@ namespace WordGame
             CreatePanel();
             CreateWord();
         }
-
         private void CreatePanel()
         {
             _panelForWord = new GameObject("Panel for word", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(GridLayoutGroup));
@@ -36,34 +33,29 @@ namespace WordGame
             CorrectParamsRectTransform();
             CorrectPeramsGridLayoutGroup();
         }
-
         private void CreateWord()
         {
             _wordContainer = new List<LetterBox>(MAX_SIZE_WORD);
             AddLetterBoxForWord(MAX_SIZE_WORD);
             OffWordContainer();
         }
-
         private void AddLetterBoxForWord(int count)
         {
             for(int i = 0; i < count; i ++)
                 _wordContainer.Add(new LetterBox());
             AddWordInPanel();
         }
-
         private void AddWordInPanel()
         {
             foreach(var letter in _wordContainer)
                 letter.SetParent(_panelForWord);
         }
-
         private void OffWordContainer()
         {  
             foreach(var letterBox in _wordContainer)
                 if (letterBox != null)
                     letterBox.SetActive(false);
         }
-
         internal void ChangeWord(string newWord)
         {
             var sizeWord = newWord.Length;
@@ -72,26 +64,22 @@ namespace WordGame
             CorrectActiveLetterBoxes(sizeWord);
             HiddenWord();
         }
-
         internal void HiddenWord()
         {
             foreach (var letterBox in _wordContainer)
                 letterBox.HiddenBox();
         }
-
         private void CheckWillItFit(int sizeNextWord)
         {
             if (sizeNextWord > _wordContainer.Count)
                 AddLetterBoxForWord(sizeNextWord - _wordContainer.Count);
         }
-
         private void CreateNewWord(string newWord)
         {
             var curretIndexWord = 0;
             foreach (var letter in newWord)
                 _wordContainer[curretIndexWord ++].content = letter;
         }
-
         private void CorrectActiveLetterBoxes(int sizeNextWord)
         {
             for (int i = 0; i < sizeNextWord; i ++)
@@ -99,7 +87,6 @@ namespace WordGame
             for (int i = sizeNextWord; i < _wordContainer.Count; i ++)
                 _wordContainer[i].SetActive(false);
         }
-
         private void CorrectParamsRectTransform()
         {
             RectTransform uitransform = _panelForWord.GetComponent<RectTransform>();
@@ -109,7 +96,6 @@ namespace WordGame
             uitransform.offsetMin = Vector2.zero;
             uitransform.offsetMax = Vector2.zero;
         }
-
         private void CorrectPeramsGridLayoutGroup()
         {
             GridLayoutGroup uiHorizontalLayoutGroup = _panelForWord.GetComponent<GridLayoutGroup>();
@@ -117,12 +103,10 @@ namespace WordGame
             uiHorizontalLayoutGroup.cellSize = new(60, 60);
             uiHorizontalLayoutGroup.spacing = new(15, 15);
         }
-
         internal void SetParent(GameObject parentObject)
         {
             _panelForWord.transform.SetParent(parentObject.transform);
         }
-
         internal bool OppenedLetter(char soughtСontent)
         {
             var gotOpenedBox = false;
@@ -135,7 +119,6 @@ namespace WordGame
             CheckAllOpenedLetters();
             return gotOpenedBox;
         }
-
         private void CheckAllOpenedLetters()
         {
             foreach (var letterBox in _wordContainer)

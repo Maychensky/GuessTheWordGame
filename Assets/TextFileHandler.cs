@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace WordGame
 {
-
     internal class TextFileHandler
     {
         private const int DEFOLT_MIN_SIZE_WORD = 0;
@@ -30,24 +29,20 @@ namespace WordGame
             CreateRegexForWord();
             _curretLine = GetNextLine();
         }
-
         private void CreateRegexForWord()
         {
             _regexForWord = new Regex(PATTERN_FOR_WORD, RegexOptions.IgnoreCase);
         }
-
         internal void ClearHistoryUsedWords()
         {
             _wordUsed.Clear();
         }
-
         private MatchCollection GetNextLine()
         {
             if(!_textFile.EndOfStream)
                 _curretLine = _regexForWord.Matches(_textFile.ReadLine());
             return _curretLine;
         }
-
         private string NextWord()
         {
             if (_indexWordForLine == _curretLine.Count || _curretLine.Count == 0)
@@ -62,7 +57,6 @@ namespace WordGame
                 return _curretLine[_indexWordForLine ++].ToString();
 
         }
-
         internal string GetNextWord()
         {
             var nextWord = NextWord();
@@ -74,16 +68,13 @@ namespace WordGame
                 return nextWord;;
             }
         }
-
         private bool CheckWordInUsedWords(string word)
         {
             return _wordUsed.Contains(Animator.StringToHash(word));
         }
-
         private void AddInUsedWords(string usedWord)
         {
             _wordUsed.Add(Animator.StringToHash(usedWord));
         }
-
     }
 }

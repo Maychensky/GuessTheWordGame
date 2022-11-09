@@ -27,7 +27,6 @@ namespace WordGame
             get {return _position; }
             set {_position = value; CorrectPosition(); }
         }
-
         private Vector2 _scaleBox;
         internal Vector2 scaleBox
         {
@@ -40,31 +39,26 @@ namespace WordGame
             get {return _spriteForBox; }
             set {_spriteForBox = value; }
         }
-
         private char _content;
         internal char content
         {
             get {return _content; }
             set {_content = value; CorrectContent(); }
         }
-
         private float _sizeContent;
         internal float sizeContent
         {
             get {return _sizeContent; }
             set {_sizeContent = value; CorrectSizeContent(); }
         }
-
         private Color _colorContent;
         internal Color colorContent
         {
             get {return colorContent; }
             set {_colorContent = value; CorrectColorContent(); }
         }
-
         internal Color colorBoxOpened { get; set; }
         internal Color colorBoxHidden { get; set; }
-
         internal LetterBox () : this (Vector3.zero, Vector2.one, _defoltSprite, Color.white, Color.gray, DEFOLT_CONTENT, DEFOLT_SIZE_CONTENT, Color.black) { }
         internal LetterBox(Vector3 position, Vector2 scaleBox, Sprite spriteForBox, Color colorBoxOpened, Color colorBoxHidden, char content, float sizeContent, Color colorContent)
         {
@@ -78,36 +72,26 @@ namespace WordGame
             this.colorBoxHidden = colorBoxHidden;
             CreateLetterBox(); 
         }
-
         private void CorrectPosition() => _box.transform.position = _position;
         private void CorrectScaleBox() => _box.transform.localScale.Set(_scaleBox.x, _scaleBox.y, _box.transform.localScale.z);
         private void CorrectContent() => _componentTMPForText.text = _content.ToString();
         private void CorrectSizeContent() => _componentTMPForText.fontSize = _sizeContent;
         private void CorrectColorContent() => _componentTMPForText.color = _colorContent;
-
-        private static void CreateDefoltSprite()
-        {
-            _defoltSprite = Resources.Load<Sprite>("Square");
-        }
-
         private void CreateLetterBox()
         {
             CreateBox();
             CreateContentForBox();
         }
-
         private void CreateBox()
         {
             _box = new GameObject("box", typeof(CanvasRenderer), typeof(RectTransform), typeof(Image));
             CreateParamsBox();
         }
-
         private void CreateParamsBox()
         {
             CorrectScaleBox();
             CorrectPosition();
         }
-
         private void CreateContentForBox()
         {
             _textForBox = new GameObject("TMP", typeof (TextMeshProUGUI));
@@ -116,14 +100,12 @@ namespace WordGame
             _componentTMPForText.alignment = TextAlignmentOptions.Center;
             CreateParamsTextForBox();
         }
-
         private void CreateParamsTextForBox()
         {
             CorrectContent();
             CorrectSizeContent();
             CorrectColorContent();
         }
-
         internal void SetActive(bool active) 
         {
             _box.SetActive(active);
@@ -142,21 +124,8 @@ namespace WordGame
             _textForBox.SetActive(false);
             _isOpened = false;
         }
-
         internal bool IsOpened() => _isOpened;
         internal bool IsHidden() => !IsOpened();
         internal void SetParent(GameObject parentObject) => _box.transform.SetParent(parentObject.transform);
-
-        public override bool Equals(object other)
-        {
-            if (!(other is LetterBox)) return false;
-            else return (Equals((LetterBox)other));
-        }
-        
-        internal bool Equals(LetterBox other)
-        {
-            return _content == other._content;
-        }
-
     }
 }
