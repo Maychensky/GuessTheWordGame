@@ -27,10 +27,12 @@ namespace WordGame
 
         void Awake()
         {
-            _startingNumberTrying = 5; 
+            _startingNumberTrying = startParams.numberTrying;
+            _minSizeWord = startParams.minSizeWord; 
             CreateCanvas();
             CreateCanvasForGameOver();
             CreateButtonForGameOver();
+            AddOnClickForGameOver();
             CreateMessageForGameOver();
             CreateStartesResurs();
             CreateEvents();
@@ -45,7 +47,6 @@ namespace WordGame
         }
         void Start()
         {
-            AddOnClickForGameOver();
             StartGame();
         }
         private void AddOnClickForGameOver()
